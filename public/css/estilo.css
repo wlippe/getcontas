@@ -1,0 +1,123 @@
+.texto_branco_item {
+    color: rgb(200,200,200);
+}
+
+.texto_branco_item:hover {
+    color: rgb(50,50,50);
+}
+
+.texto_branco_item:active {
+    background-color: rgb(50,50,50);
+    color: rgb(200,200,200);
+}
+
+.acoes_consulta {
+    padding-top:   4rem;
+    padding-right: 4rem;
+    padding-left:  4rem;
+}
+
+.table_consulta {
+    padding-top:   1rem;
+    padding-right: 4rem;
+    padding-left:  4rem;
+}
+
+.table_manutencao {
+    padding-top:   4rem;
+    padding-right: 8rem;
+    padding-left:  8rem;
+}
+
+.acoes_manutencao {
+    position: absolute; 
+    padding-top: 2rem;
+}
+
+.padrao_site {
+    padding-top:   3rem;
+    padding-right: 4rem;
+    padding-left:  4rem;
+}
+
+.acoes_inline {
+    width:30px;
+    height:27px;
+}
+
+.card_down {
+    padding-top: 4rem;
+}
+
+.card_link {
+    color: rgb(50,50,50);
+    text-decoration: none; 
+}
+
+.card_link:hover {
+    color: rgb(80, 80, 80);
+}
+
+.acoes {
+    width: 5.6rem
+}
+
+.group {
+    padding-left: 3px;
+}
+
+.menu_icone {
+    max-width:  20px;
+    max-height: 20px;
+    width: auto;
+    height: auto;
+}
+
+.tabela_vazia {
+    text-align:center; 
+    color: rgb(140,140,140)
+}
+
+.link {
+    color: #3490dc;
+    text-decoration: none; 
+}
+
+#link:hover {
+    color: rgb(3, 130, 200);
+}
+
+.hint {
+    display:grid;
+}
+
+#mostrar{
+    display: none;
+}
+
+#passar_mouse:hover #mostrar{
+    display:grid;
+    position: absolute;
+    background-color: white;
+    font-weight: normal;
+} 
+
+.marcada {
+    background-color:rgb(220,220,220);
+}
+
+.direita {
+    float: right;
+}
+
+.esquerda {
+    float: left;
+}
+
+.mt1 {
+    margin-top: 1rem;
+}
+
+.money {
+    text-align: right;
+}
