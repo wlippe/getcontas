@@ -7,7 +7,7 @@ use App\Models\Despesa;
 
 class DespesaController extends PadraoController {
 
-     /**
+    /**
      * Cria uma nova instancia do Controlador.
      */
     public function __construct() {
