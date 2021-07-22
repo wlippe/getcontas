@@ -20,21 +20,21 @@
         </div>
 
         <div class="col-md-4">
-            <label for="rendimento" class="form-label"> Rendimento Anual </label>
-            <input id="rendimento" type="number" class="form-control @error('rendimento') is-invalid @enderror" name="rendimento" value="{{ $registro->rendimento?? ''}}" {{$show ? 'disabled':''}} required autocomplete="rendimento" 
+            <label for="aplicadoinicial" class="form-label"> Aplicado Inicial </label>
+            <input id="aplicadoinicial" type="number" class="form-control @error('aplicadoinicial') is-invalid @enderror" name="aplicadoinicial" value="{{ $registro->aplicadoinicial?? ''}}" {{$show ? 'disabled':''}} required autocomplete="rendimento" 
             onchange="this.value = parseFloat(this.value).toFixed(2)" placeholder="0,00" step=".01">
         </div>
     
         <div class="col-md-4">
-            <label for="metamensal" class="form-label"> Meta Mensal </label>
-            <input id="metamensal" type="number" class="form-control @error('metamensal') is-invalid @enderror" name="metamensal" value="{{ $registro->metamensal?? ''}}" {{$show ? 'disabled':''}} required autocomplete="metamensal" 
+            <label for="aplicadomensal" class="form-label"> Aplicado Mensal </label>
+            <input id="aplicadomensal" type="number" class="form-control @error('aplicadomensal') is-invalid @enderror" name="aplicadomensal" value="{{ $registro->aplicadomensal?? ''}}" {{$show ? 'disabled':''}} required autocomplete="metamensal" 
             onchange="this.value = parseFloat(this.value).toFixed(2)" placeholder="0,00" step=".01">
         </div>
 
         <div class="col-md-4">
-            <label for="metafinal" class="form-label"> Meta Final </label>
-            <input id="metafinal" type="number" class="form-control @error('metafinal') is-invalid @enderror" name="metafinal" value="{{ $registro->metafinal?? ''}}" {{$show ? 'disabled':''}} required autocomplete="metafinal" 
-            onchange="this.value = parseFloat(this.value).toFixed(2)" placeholder="0,00" step=".01">
+            <label for="rendimentoanual" class="form-label"> Rendimento Anual </label>
+            <input id="rendimentoanual" type="number" class="form-control money @error('rendimentoanual') is-invalid @enderror" name="rendimentoanual" value="{{ $registro->rendimentoanual?? ''}}" {{$show ? 'disabled':''}} required autocomplete="metafinal" 
+            onchange="monetario()" onkeydown="monetario()" placeholder="0,00" step=".01">
         </div>
     </div>
 

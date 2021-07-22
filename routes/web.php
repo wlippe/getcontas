@@ -25,10 +25,8 @@ Route::fallback(function() {
     return view('welcome');
 });
 
-
-
-Route::get('/contato',  [App\Http\Controllers\ContatoController::class, 'index'])->name('contato');
-Route::post('/contato', [App\Http\Controllers\ContatoController::class, 'send'])->name('contato');
+Route::get('/contato',  [ContatoController::class, 'index'])->name('contato');
+Route::post('/contato', [ContatoController::class, 'send'])->name('contato');
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

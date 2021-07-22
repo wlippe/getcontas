@@ -18,9 +18,9 @@ class CreateAplicacoesTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('nome', 50);
             $table->text('objetivo');
-            $table->float('rendimento');
-            $table->float('metamensal');
-            $table->float('metafinal');
+            $table->float('aplicadoinicial');
+            $table->float('aplicadomensal');
+            $table->float('rendimentoanual');
             $table->timestamps();
         });
     }

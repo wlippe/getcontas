@@ -21,11 +21,11 @@
                         <table id="tabela_consulta" class="table table-hover">
                             <thead style="background-color: rgb(250, 250, 250)">
                                 <tr>
-                                    <th scope="col" class="s-6">Nome </th>
-                                    <th scope="col" class="s-10">Objetivo</th>
-                                    <th scope="col" class="s-2">Rendimento Anual</th>
-                                    <th scope="col" class="s-2">Meta Mensal</th>
-                                    <th scope="col" class="s-2">Meta Final</th>
+                                    <th scope="col" class="s-6" > Nome </th>
+                                    <th scope="col" class="s-10"> Objetivo </th>
+                                    <th scope="col" class="s-2" > Aplicado Inicial </th>
+                                    <th scope="col" class="s-2" > Aplicado Mensal </th>
+                                    <th scope="col" class="s-2" > Rendimento Anual </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,9 +34,9 @@
                                         <tr id="{{ $aplicacao->id }}">
                                             <td>{{ $aplicacao->nome }}</td>
                                             <td>{{ $aplicacao->objetivo }}</td>
-                                            <td>{{ $aplicacao->rendimento }} </td>
-                                            <td>{{ $aplicacao->metamensal }} </td>
-                                            <td>{{ $aplicacao->metafinal }} </td>
+                                            <td class="money">{{ $aplicacao->aplicadoinicial }} </td>
+                                            <td class="money">{{ $aplicacao->aplicadomensal }} </td>
+                                            <td class="money">{{ $aplicacao->rendimentoanual }} </td>
                                         </tr>
                                     @endforeach
                                 @else

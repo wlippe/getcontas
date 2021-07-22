@@ -14,9 +14,9 @@ class Aplicacao extends Model {
         'user_id',
         'nome',
         'objetivo',
-        'rendimento',
-        'metamensal',
-        'metafinal',
+        'aplicadoinicial',
+        'aplicadomensal',
+        'rendimentoanual',
     ];
 
     public function user() {
