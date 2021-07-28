@@ -42,7 +42,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" >
 
     {{-- <link href="{{ asset('css/app.css') }}"    rel="stylesheet"> --}}
-    <link href="{{ asset('css/estilo.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estilo.css') }}" rel="stylesheet" >
 
     <script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}"></script>
 

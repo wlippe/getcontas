@@ -124,6 +124,7 @@
 
 
 /* Table responsive*/
+
 @media(max-width: 500px){
 	.table thead{
 		display: none;
@@ -153,4 +154,5 @@
 		text-align: left;
 	}
 }
+
 /* End Table responsive*/
