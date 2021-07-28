@@ -1,6 +1,6 @@
 @extends('layouts.consulta_padrao')
 
-@section('titulo') Contas @endsection
+@section('titulo', 'Contas')
 
 @section('acoes')
     <x-botao_incluir    rota="conta.create" />
@@ -12,11 +12,12 @@
 @section('cabecalho') 
     <th scope="col" > Nome      </th>
     <th scope="col" > Descrição </th>
-    <th scope="col" style="width:  10rem"> Tipo      </th>
-    <th scope="col" style="width:  10rem"> Saldo     </th>
+    <th scope="col" > Tipo      </th>
+    <th scope="col" > Saldo     </th>
 @endsection
 
 @section('consulta')
+@if($consulta->total() > 0)
     @foreach($consulta as $conta)
         <tr id="{{ $conta->id }}" name="consulta">
             <td> {{ $conta->nome }}      </td>
@@ -25,4 +26,15 @@
             <td class="money" > {{ $conta->saldo }} </td>
         </tr>
     @endforeach
+@else
+    <tr>
+        <td colspan="4" class="tabela_vazia">  
+            Nenhum registro encontrado
+        </td>
+    </tr>
+@endif
+@endsection
+
+@section('paginacao')
+    @component('components.paginacao', ['consulta' => $consulta]) @endcomponent
 @endsection

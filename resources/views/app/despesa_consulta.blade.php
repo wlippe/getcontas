@@ -11,17 +11,15 @@
 
 @section('cabecalho') 
     <th scope="col" > Descrição  </th>
-    <th scope="col" style="width:10rem" > Data Vencimento </th>
-    <th scope="col" style="width:10rem" > Parcelas </th>
-    <th scope="col" style="width:10rem" > Tipo </th>
-    <th scope="col" style="width:10rem" > Situação </th>
-    <th scope="col" style="width:8rem" > valor </th>
+    <th scope="col" > Data Vencimento </th>
+    <th scope="col" > Parcelas </th>
+    <th scope="col" > Tipo </th>
+    <th scope="col" > Situação </th>
+    <th scope="col" > valor </th>
 @endsection
 
 @section('consulta')
-
 @if($consulta->total() > 0)
-
     @foreach($consulta as $registro)
         <tr id="{{ $registro->id }}">
             <td> {{ $registro->descricao }} </td>
@@ -32,7 +30,6 @@
             <td class="money"> {{ $registro->valor }} </td>
         </tr>
     @endforeach
-
 @else
     <tr>
         <td colspan="6" class="tabela_vazia">  

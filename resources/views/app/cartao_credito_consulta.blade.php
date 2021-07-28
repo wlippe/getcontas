@@ -21,7 +21,6 @@
 @section('consulta')
 
 @if($consulta->total() > 0)
-
     @foreach($consulta as $registro)
         <tr id="{{ $registro->id }}">
             <td> {{ $registro->descricao }} </td>
@@ -32,7 +31,6 @@
             <td class="money"> {{ $registro->limite }} </td>
         </tr>
     @endforeach
-
 @else
     <tr>
         <td colspan="5" class="tabela_vazia">  
