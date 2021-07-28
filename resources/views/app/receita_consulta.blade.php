@@ -20,10 +20,10 @@
 @if($consulta->total() > 0)
     @foreach($consulta as $receita)
         <tr id="{{ $receita->id }}">
-            <td>{{ $receita->descricao }}</td>
-            <td>{{ $receita->data }} </td>
-            <td>{{ $receita->tipo }} </td>
-            <td class="money">{{ $receita->valor }} </td>
+            <td data-label="Descrição">{{ $receita->descricao }}</td>
+            <td data-label="Data">{{ $receita->data }} </td>
+            <td data-label="Tipo">{{ $receita->tipo }} </td>
+            <td data-label="Valor" class="money">{{ $receita->valor }} </td>
         </tr>
     @endforeach        
 @else

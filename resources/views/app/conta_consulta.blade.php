@@ -20,10 +20,10 @@
 @if($consulta->total() > 0)
     @foreach($consulta as $conta)
         <tr id="{{ $conta->id }}" name="consulta">
-            <td> {{ $conta->nome }}      </td>
-            <td> {{ $conta->descricao }} </td>
-            <td> {{ $conta->tipo }}      </td>
-            <td class="money" > {{ $conta->saldo }} </td>
+            <td data-label="Nome"> {{ $conta->nome }}      </td>
+            <td data-label="Descrição"> {{ $conta->descricao }} </td>
+            <td data-label="Tipo"> {{ $conta->tipo }}      </td>
+            <td data-label="Saldo" class="money" > {{ $conta->saldo }} </td>
         </tr>
     @endforeach
 @else

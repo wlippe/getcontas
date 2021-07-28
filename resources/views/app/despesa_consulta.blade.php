@@ -22,12 +22,12 @@
 @if($consulta->total() > 0)
     @foreach($consulta as $registro)
         <tr id="{{ $registro->id }}">
-            <td> {{ $registro->descricao }} </td>
-            <td> {{ $registro->datavencimento }} </td>
-            <td> {{ $registro->parcelas }} </td>
-            <td> {{ $registro->tipo }} </td>
-            <td> {{ $registro->siuacao }} </td>
-            <td class="money"> {{ $registro->valor }} </td>
+            <td data-label="Descrição"> {{ $registro->descricao }} </td>
+            <td data-label="Data Vencimento"> {{ $registro->datavencimento }} </td>
+            <td data-label="Parcelas"> {{ $registro->parcelas }} </td>
+            <td data-label="Tipo"> {{ $registro->tipo }} </td>
+            <td data-label="Situação"> {{ $registro->siuacao }} </td>
+            <td data-label="valor" class="money"> {{ $registro->valor }} </td>
         </tr>
     @endforeach
 @else

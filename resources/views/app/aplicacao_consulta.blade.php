@@ -22,11 +22,11 @@
 @if($consulta->total() > 0)
     @foreach($consulta as $aplicacao)
         <tr id="{{ $aplicacao->id }}">
-            <td>{{ $aplicacao->nome }}</td>
-            <td>{{ $aplicacao->objetivo }}</td>
-            <td class="money">{{ $aplicacao->aplicadoinicial }} </td>
-            <td class="money">{{ $aplicacao->aplicadomensal }} </td>
-            <td class="money">{{ $aplicacao->rendimentoanual }} </td>
+            <td data-label="Nome">{{ $aplicacao->nome }}</td>
+            <td data-label="Objetivo">{{ $aplicacao->objetivo }}</td>
+            <td data-label="Aplicado Inicial" class="money">{{ $aplicacao->aplicadoinicial }} </td>
+            <td data-label="Aplicado Mensal"  class="money">{{ $aplicacao->aplicadomensal }} </td>
+            <td data-label="Rendimento Anual" class="money">{{ $aplicacao->rendimentoanual }} </td>
         </tr>
     @endforeach
 @else
