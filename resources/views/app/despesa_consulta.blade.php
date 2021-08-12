@@ -2,6 +2,10 @@
 
 @section('titulo', 'Despesa')
 
+@section('navegacao')
+    @component('components.navegacao', ['rota' => 'despesa.pesquisar', 'data' => $data ]) @endcomponent
+@endsection
+
 @section('acoes')
     <x-botao_incluir    rota="despesa.create" />
     <x-botao_editar     rota="despesa.edit"/>

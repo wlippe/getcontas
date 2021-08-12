@@ -2,6 +2,10 @@
 
 @section('titulo') Receitas @endsection
 
+@section('navegacao')
+    @component('components.navegacao', ['rota' => 'receita.pesquisar', 'data' => $data ]) @endcomponent
+@endsection
+
 @section('acoes')
     <x-botao_incluir    rota="receita.create" />
     <x-botao_editar     rota="receita.edit"/>
@@ -33,6 +37,7 @@
         </td>
     </tr>
 @endif
+
 @endsection
 
 @section('paginacao')

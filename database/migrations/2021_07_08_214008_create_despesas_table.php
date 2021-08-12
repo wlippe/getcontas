@@ -20,8 +20,8 @@ class CreateDespesasTable extends Migration
             $table->date('datavencimento');
             $table->float('valor');
             $table->smallInteger('tipo');
-            $table->smallInteger('situacao');
-            $table->smallInteger('parcelas');
+            $table->smallInteger('situacao')->nullable();
+            $table->smallInteger('parcelas')->nullable();
 
             $table->timestamps();
         });

@@ -41,7 +41,3 @@ function round(fValor, iDecimais) {
     var k = Math.pow(10, iDecimais);
     return Math.round(fValor * k)/k;
 }
-
-function monetario() {
-    $('#money').value = parseFloat($('#money').value).toFixed(2)
-}

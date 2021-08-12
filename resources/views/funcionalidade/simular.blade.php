@@ -51,18 +51,11 @@
             </div>
 
           <div class="form-check-inline">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="periodo" name="periodo"  value="1" checked onChange="calculaPeriodoAplicacao()">
-              <label class="form-check-label" for="inlineCheckbox1"> Mês a mês </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="periodo" name="periodo" value="3" onChange="calculaPeriodoAplicacao()">
-              <label class="form-check-label" for="inlineCheckbox2"> De 3 em 3 meses </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="periodo" name="periodo" value="6" onChange="calculaPeriodoAplicacao()">
-              <label class="form-check-label" for="inlineCheckbox3"> De 6 em 6 meses </label>
-            </div>
+            <select id="periodo" name="periodo" class="form-control" onChange="calculaPeriodoAplicacao()">
+              <option value="1" selected > Mês a mês </option>
+              <option value="2" > De 3 em 3 meses </option>
+              <option value="3" > De 6 em 6 meses </option>
+            </select>
           </div>
 
             <div class="col-md-12">
@@ -101,7 +94,7 @@
     var fAplicadoMensal   = parseFloat(oCampoAplicacaoMensal.value);
     var fRendimentoAnual  = parseFloat(oCampoRendimentoAnual.value);
     var iPeriodoDeCalculo = parseInt(oBotaoRange.value);
-    var iPeriodo          = parseInt(document.querySelector('input[name=periodo]:checked').value);
+    var iPeriodo          = parseInt(document.getElementById('periodo').value);
 
     var iMeses = iPeriodo * iPeriodoDeCalculo;
 

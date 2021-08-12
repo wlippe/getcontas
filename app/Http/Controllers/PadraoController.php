@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -42,7 +43,9 @@ abstract class PadraoController extends Controller {
     /**
      * Salva a nova receita no banco de dados.
      */
-    protected function store(Request $request) {   
+    protected function store(Request $request) {
+        $this->validaRequest($request);
+
         $dados = $request->all();
         $dados['user_id'] = $this->getUserId();
 
@@ -111,6 +114,8 @@ abstract class PadraoController extends Controller {
      * Atualiza o registro no banco de dados
      */
     protected function update(Request $request) {
+        $this->validaRequest($request);
+
         $registro = $this->getModel()->where('id', $request->id);
         $registro = $registro->where(self::ID_USUARIO, $this->getUserId());
         $registro = $registro->get();
@@ -120,7 +125,7 @@ abstract class PadraoController extends Controller {
             $dados = $this->processaDados($dados);
             $dados = $this->processaDadosAlteracao($dados);
 
-            if ($this->validaAlteracao($dados)) {
+            if ($this->validaAlteracao($request)) {
                 $registro->update($dados);
 
                 return redirect(route($this->getRota()))->with('sucess', 'Registro alterado com sucesso!');
@@ -128,7 +133,7 @@ abstract class PadraoController extends Controller {
 
         }
 
-        return redirect(route($this->getRota()))->with('sucess', 'Não foi possível alterar o registro!');
+        return redirect(route($this->getRota()))->with('danger', 'Não foi possível alterar o registro!');
     }
 
     /**
@@ -307,4 +312,20 @@ abstract class PadraoController extends Controller {
         return true;
     }
 
+    protected function validaRequest(Request $request) {
+        return true;
+    }
+
+    protected function getData() {
+        $data = new \stdClass();
+        $data->dia = intval(date('d'));
+        $data->mes = intval(date('m'));
+        $data->ano = date('Y');
+        
+        return $data;
+    }
+
+    protected function getDataAtual() {
+        return  date('Y/m/d');
+    }
 }

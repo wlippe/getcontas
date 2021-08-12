@@ -36,4 +36,12 @@ class ContaController extends PadraoController {
 
         return $aTipoConta[$iTipo];
     }
+
+    protected function validaRequest($request){
+        return $this->validate($request, [
+            'descricao' => ['required'],
+            'nome' => ['required', 'string', 'max:50'],
+            'tipo'  => ['required', 'integer','gt:0']
+        ]);
+    }
 }

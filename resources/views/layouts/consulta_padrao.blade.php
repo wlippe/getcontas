@@ -7,6 +7,9 @@
                 <div class="card">
                     <div class="card-header">  @yield('titulo') </div>
                         <div class="card-body">
+                            <div>
+                                @yield('navegacao')
+                            </div>
                             <div class="btn-toolbar" role="toolbar" style="margin-bottom: 1rem;">
                                 @yield('acoes')
                             </div>
