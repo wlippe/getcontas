@@ -21,7 +21,8 @@ class CreateDespesasTable extends Migration
             $table->float('valor');
             $table->smallInteger('tipo');
             $table->smallInteger('situacao')->nullable();
-            $table->smallInteger('parcelas')->nullable();
+            $table->smallInteger('parcela')->nullable();
+            $table->smallInteger('parcelastotal')->nullable();
 
             $table->timestamps();
         });

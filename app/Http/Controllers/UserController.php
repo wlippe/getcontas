@@ -66,10 +66,14 @@ class UserController extends PadraoController {
         $this->validate($request, ['name' => ['required', 'string', 'max:255']]);
 
         if (Auth()->user()->update($dados)) {
-            return redirect(route('usuario'))->with('success', 'Nome alterado com sucesso!');
+            toastr()->success('Nome alterado com sucesso!');
+
+            return redirect(route('usuario'));
         }
 
-        return redirect(route('usuario'))->with('danger', 'Não foi possível alterar o registro!');
+        toastr()->error('Não foi possível alterar o Nome');
+
+        return redirect(route('usuario'));
     }
 
     public function senha(Request $request) {
@@ -99,11 +103,15 @@ class UserController extends PadraoController {
             $dados = ['password' => Hash::make($request->password)];
     
             if (Auth()->user()->update($dados)) {
-                return redirect(route('usuario'))->with('success', 'Senha alterada com sucesso!');
+                toastr()->success('Senha alterada com sucesso!');
+
+                return redirect(route('usuario'));
             }
         }
 
-        return redirect(route('usuario'))->with('danger', 'Não foi possível alterar o registro!');
+        toastr()->error('Não foi possível alterar a senha');
+
+        return redirect(route('usuario'));
     }
 
     public function validaSenhaAtual($senha) {

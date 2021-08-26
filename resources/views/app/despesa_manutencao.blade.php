@@ -23,7 +23,8 @@
         <div class="col-md-6">
             <label for="limite" class="form-label"> Valor </label>
             <input id="valor" type="number" class="form-control money @error('valor') is-invalid @enderror" 
-            name="valor" value="{{ $registro->valor?? ''}}{{ old('valor') }}" autocomplete="valor" {{$show ? 'disabled':''}} placeholder="0,00">
+            name="valor" value="{{ $registro->valor?? ''}}{{ old('valor') }}" autocomplete="valor" {{$show ? 'disabled':''}} 
+            onchange="this.value = parseFloat(this.value).toFixed(2)" placeholder="0,00">
         </div>
 
         <div class="col-md-6">
@@ -31,16 +32,15 @@
             <select id="tipo" name="tipo" class="form-control @error('tipo') is-invalid @enderror" {{$show ? 'disabled':''}} 
                 onchange="onChangeTipo('div_parcelas')">
                 <option selected disabled > Selecione </option>
-                <option value="1" {{$registro->tipo ?? '' == 1 ? "selected='selected'" : ""}} {{ intval(old('tipo')) == 1 ? "selected='selected'" : ""}}> Pontual </option>
-                <option value="2" {{$registro->tipo ?? '' == 2 ? "selected='selected'" : ""}} {{ intval(old('tipo')) == 2 ? "selected='selected'" : ""}}> Mensal  </option>
-                <option value="3" {{$registro->tipo ?? '' == 3 ? "selected='selected'" : ""}} {{ intval(old('tipo')) == 3 ? "selected='selected'" : ""}}> Parcelada </option>
+                <option value="1" {{$registro->tipo == 1 ? "selected='selected'" : ""}} {{ intval(old('tipo')) == 1 ? "selected='selected'" : ""}}> Pontual </option>
+                <option value="2" {{$registro->tipo == 2 ? "selected='selected'" : ""}} {{ intval(old('tipo')) == 2 ? "selected='selected'" : ""}}> Parcelada  </option>
             </select>
         </div>
 
-        <div class="col-md-6" style="display:none" id="div_parcelas">
-            <label for="parcelas" class="form-label"> Número de Parcelas </label>
-            <input id="parcelas" type="number" class="form-control @error('parcelas') is-invalid @enderror" 
-            name="parcelas" value="{{ $registro->parcelas?? ''}}" autocomplete="parcelas" {{$show ? 'disabled':''}}>
+        <div class="col-md-6" style="display:{{$registro->tipo == 3 ? "block" : "none"}}" id="div_parcelas">
+            <label for="parcelastotal" class="form-label"> Número de Parcelas </label>
+            <input id="parcelastotal" type="number" class="form-control @error('parcelastotal') is-invalid @enderror" 
+            name="parcelastotal" value="{{ $registro->parcelastotal?? ''}}" autocomplete="parcelastotal" {{$show ? 'disabled':''}}>
         </div>
 
     </div>
@@ -53,14 +53,24 @@
 
 <script type="text/javascript">
 
-    function onChangeTipo(el) {
+    function onChangeTipo(me) {
         var tipo = document.getElementById('tipo').value;
 
-        if(tipo == 3)
-            document.getElementById(el).style.display = 'block';
+        if(tipo == 2)
+            document.getElementById(me).style.display = 'block';
         else
-            document.getElementById(el).style.display = 'none';
-            document.getElementById('parcelas').value = '';
+            document.getElementById(me).style.display = 'none';
+            document.getElementById('parcelastotal').value = '';
+    }
+
+    function onChangeAssociarCartao(me) {
+        let associarCartao = document.getElementById('associar_a_cartao');
+
+        if(associarCartao.checked)
+            document.getElementById(me).style.display = 'block';
+        else
+            document.getElementById(me).style.display = 'none';
+            document.getElementById('cartaocredito_id').value = '';
     }
 
 </script>

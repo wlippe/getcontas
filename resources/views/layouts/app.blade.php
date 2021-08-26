@@ -46,6 +46,8 @@
 
     <script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}"></script>
 
+     @toastr_css
+
 </head>
 <body style="background-color:rgb(246,246,246)">
     <div id="app">
@@ -85,9 +87,11 @@
                                         <a class="dropdown-item texto_branco_item" href="{{ route('despesa') }}">
                                             Despesas
                                         </a>
+                                        @php /*
                                         <a class="dropdown-item texto_branco_item" href="{{ route('cartaocredito') }}">
                                             Cartões de Créditos
                                         </a>
+                                        */ @endphp
                                         <a class="dropdown-item texto_branco_item" href="{{ route('conta') }}">
                                             Contas
                                         </a>
@@ -136,6 +140,9 @@
                                     <a class="dropdown-item texto_branco_item" href="{{ route('usuario') }}">
                                         Perfil
                                     </a>
+                                    <a class="dropdown-item texto_branco_item" href="{{ route('contato') }}">
+                                        Contato
+                                    </a>
                                     <a class="dropdown-item texto_branco_item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -156,6 +163,12 @@
         </div>
 
         <main class="py-4">
+
+            @jquery
+            @toastr_js
+            @toastr_render
+            
+
             @yield('content')
         </main>
     </div>

@@ -18,6 +18,7 @@ class DespesaController extends PadraoController {
     }
 
     protected function index($data = null) {
+        $this->processaReceitas();
 
         if (!$data) {
             $data = $this->getData();
@@ -39,14 +40,58 @@ class DespesaController extends PadraoController {
         foreach ($consulta as $despesa) {
             $despesa->valor = $this->formataValor($despesa->valor);
             $despesa->datavencimento = $this->formataData($despesa->datavencimento);
+
+            if ($despesa->tipo == 2) {
+                $despesa->parcelas = $despesa->parcela.'/'.$despesa->parcelastotal;
+            }
+
+            $despesa->situacao = $this->trataSituacao($despesa->situacao);
+
             $despesa->tipo = $this->getTipoDespesa($despesa->tipo);
         }
 
         return $consulta;
     }
+
+    /**
+     * Salva a nova despesa no banco de dados.
+     */
+    protected function store(Request $request) {
+        $dados = $request->all();
+        $dados['user_id'] = $this->getUserId();
+
+        if($this->validaInclusao($dados)) {
+
+            if($dados['tipo'] == 2){
+
+                for ($indice = 1; $indice <= $dados['parcelastotal']; $indice++) {
+
+                    if($indice > 1) {
+                        $dados['datavencimento'] = $this->getProximaData($dados['datavencimento']);
+                    }
+
+                    $dados['parcela'] = $indice;
+
+                    Despesa::create($dados);
+                }
+            }
+            else {
+                Despesa::create($dados);
+            }
+
+            toastr()->success('Registro cadastrado com sucesso!');
+
+            return redirect(route($this->getRota()));
+        }
+
+        toastr()->error('Não foi possível cadastrar o registro!');
+
+        return redirect(route($this->getRota()));
+    }
 /*
     protected function trataDados($dados) {
-        $dados['valor'] = $this->formataValor($dados['valor']);
+        //$dados['valor'] = $this->formataValor($dados['valor']);
+
         return $dados;
     }
 
@@ -70,11 +115,19 @@ class DespesaController extends PadraoController {
     private function getTipoDespesa($tipo) {
         $lista = [
             1 => 'Pontual',
-            2 => 'Mensal',
-            3 => 'Parcelada',
+            2 => 'Parcelada',
         ];
 
         return $lista[$tipo];
+    }
+
+    public function trataSituacao($situacao) {
+        if ($situacao == 1) {
+            return 'Pago';
+        }
+        else {
+            return 'A Pagar';
+        }
     }
 
     protected function pesquisar(Request $request) {
@@ -83,5 +136,19 @@ class DespesaController extends PadraoController {
         $data->ano = $request->ano;
 
         return $this->index($data);
+    }
+
+    public function getProximaData($data) {
+        $dia = Data::extractDay($data);
+        $mes = Data::extractMonth($data);
+        $ano = Data::extractYear($data);
+        
+        if (intval($dia) > intval(Data::getLastDayInMonth($mes+1))) {
+            $dia = Data::getLastDayInMonth($mes+1);
+        }
+
+        $data = '20'.$ano.'-'.$this->trataDigito($mes).'-'.$this->trataDigito($dia);
+
+        return Data::addMes($data, 1);
     }
 }

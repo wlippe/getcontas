@@ -26,8 +26,7 @@
     <div class="mb-3">
         <label for="descricao" class="form-label" > Descrição </label>
         <textarea id="descricao" name="descricao" rows="3" class="form-control @error('descricao') is-invalid @enderror" {{$show ? 'disabled':''}}
-        >{{ $registro->descricao?? ''}}{{ old('descricao') }}
-        </textarea>
+        >{{ $registro->descricao?? ''}}{{ old('descricao') }}</textarea>
     </div>
 
 </div>

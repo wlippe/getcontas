@@ -2,6 +2,7 @@
     @csrf
     <div class="input-group mb-3">
         <div class="input-group">
+
             <select class="form-select" id="mes" name="mes">
                 <option value="1"  {{$data->mes == 1 ?  "selected='selected'" : ""}} > Janeiro </option>
                 <option value="2"  {{$data->mes == 2 ?  "selected='selected'" : ""}} > Fevereiro </option>
@@ -16,13 +17,11 @@
                 <option value="11" {{$data->mes == 11 ? "selected='selected'" : ""}} > Novembro </option>
                 <option value="12" {{$data->mes == 12 ? "selected='selected'" : ""}} > Dezembro </option>
             </select>
-            <select class="form-select" id="ano" name="ano">
-                <option value="{{ $data->ano-2 }}" {{$data->ano == $data->ano-2 ? "selected='selected'" : ""}} > {{ $data->ano-2 }} </option>
-                <option value="{{ $data->ano-1 }}" {{$data->ano == $data->ano-1 ? "selected='selected'" : ""}} > {{ $data->ano-1 }} </option>
-                <option value="{{ $data->ano }}"   {{$data->ano == $data->ano   ? "selected='selected'" : ""}} > {{ $data->ano }}   </option>
-                <option value="{{ $data->ano+1 }}" {{$data->ano == $data->ano+1 ? "selected='selected'" : ""}} > {{ $data->ano+1 }} </option>
-            </select>
+
+            <input id="ano" type="text" class="form-control @error('ano') is-invalid @enderror" name="ano" value="{{$data->ano?? ''}}{{old('ano')}}" autocomplete="ano" autofocus placeholder="Ano" min="4" max="4" >
+
             <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+
         </div>
     </div>
 </form>

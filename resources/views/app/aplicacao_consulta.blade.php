@@ -7,7 +7,8 @@
     <x-botao_editar     rota="aplicacao.edit"/>
     <x-botao_excluir    rota="aplicacao.destroy"/>
     <x-botao_visualizar rota="aplicacao.show"/>
-    @component('funcionalidade.simular') @endcomponent
+    @component('funcionalidade.movimentar', ['contas' => $contas]) @endcomponent
+    @component('funcionalidade.simular' ) @endcomponent
 @endsection
 
 @section('cabecalho') 
@@ -16,6 +17,7 @@
     <th scope="col" > Aplicado Inicial </th>
     <th scope="col" > Aplicado Mensal </th>
     <th scope="col" > Rendimento Anual </th>
+    <th scope="col" > Saldo </th>
 @endsection
 
 @section('consulta')
@@ -24,9 +26,10 @@
         <tr id="{{ $aplicacao->id }}">
             <td data-label="Nome">{{ $aplicacao->nome }}</td>
             <td data-label="Objetivo">{{ $aplicacao->objetivo }}</td>
-            <td data-label="Aplicado Inicial" class="money">{{ $aplicacao->aplicadoinicial }} </td>
-            <td data-label="Aplicado Mensal"  class="money">{{ $aplicacao->aplicadomensal }} </td>
-            <td data-label="Rendimento Anual" class="money">{{ $aplicacao->rendimentoanual }} </td>
+            <td data-label="Aplicado Inicial" data-aplicadoinicial="{{ $aplicacao->aplicadoinicial }}" > {{ $aplicacao->aplicadoinicial }} </td>
+            <td data-label="Aplicado Mensal"  data-aplicadomensal="{{ $aplicacao->aplicadomensal }}"   > {{ $aplicacao->aplicadomensal }}  </td>
+            <td data-label="Rendimento Anual" data-rendimentoanual="{{ $aplicacao->rendimentoanual }}" > {{ $aplicacao->rendimentoanual }} </td>
+            <td data-label="Saldo" data-saldo="{{ $aplicacao->saldo }}" > {{ $aplicacao->saldo }} </td>
         </tr>
     @endforeach
 @else

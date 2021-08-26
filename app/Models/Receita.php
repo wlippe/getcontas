@@ -10,6 +10,7 @@ class Receita extends Model {
    
     protected $fillable = [
         'user_id',
+        'conta_id',
         'descricao',
         'valor',
         'tipo',

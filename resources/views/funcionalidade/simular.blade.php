@@ -18,18 +18,18 @@
         <div class="row g-3">
             <div class="col-md-4">
                 <label for="valor" class="form-label"> Valor Inicial</label>
-                <input id="valorInicial" type="number" class="form-control" name="valorInicial" value="{{ $receita->valor?? ''}}" required autocomplete="valor" 
+                <input id="valorInicial" type="number" class="form-control money" name="valorInicial" value="{{ $receita->valor?? ''}}" required autocomplete="valor" 
                  placeholder="0,00" value="0" min="0">
             </div>
 
             <div class="col-md-4">
                 <label for="valor" class="form-label"> Aplicado Mensal </label>
-                <input id="aplicadoMensal" type="number" class="form-control" name="aplicadoMensal" placeholder="0,00" min="0">
+                <input id="aplicadoMensal" type="number" class="form-control money" name="aplicadoMensal" placeholder="0,00" min="0">
             </div>
 
             <div class="col-md-4">
                 <label for="valor" class="form-label"> Rendimento Anual </label>
-                <input id="rendimentoAnual" type="number" class="form-control" name="rendimentoAnual"
+                <input id="rendimentoAnual" type="number" class="form-control money" name="rendimentoAnual"
                  placeholder="0,00" value="0" min="0">
             </div>
   
@@ -76,6 +76,9 @@
   </div>
 </div>
 
+<script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}">
+</script>
+
 <script type="text/javascript">
 
   const STRING_MES   = 'Mês';
@@ -88,6 +91,25 @@
   var oCampoTotalJuros      = document.getElementById('totalJurosPeriodo');
   var oCampoTotalPeriodo    = document.getElementById('totalPeriodo');
   var oBotaoRange           = document.getElementById('botaoRange');
+
+  $(document).ready( function() {
+
+      $('tr').click( function() {
+
+        var saldo           = $(this).closest('tr').find('td[data-saldo]').data('saldo');
+        var aplicadomensal  = $(this).closest('tr').find('td[data-aplicadomensal]').data('aplicadomensal');
+        var rendimentoanual = $(this).closest('tr').find('td[data-rendimentoanual]').data('rendimentoanual');
+
+        saldo           = parseFloat(saldo, 2);
+        aplicadomensal  = parseFloat(aplicadomensal);
+        rendimentoanual = parseFloat(rendimentoanual);
+
+        $("#valorInicial").val(saldo);
+        $("#aplicadoMensal").val(aplicadomensal);
+        $("#rendimentoAnual").val(rendimentoanual);
+      });
+
+  });
 
   function calculaPeriodoAplicacao() {
     var fAplicadoInicial  = parseFloat(oCampoValorInicial.value);

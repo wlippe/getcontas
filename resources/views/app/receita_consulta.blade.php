@@ -3,7 +3,7 @@
 @section('titulo') Receitas @endsection
 
 @section('navegacao')
-    @component('components.navegacao', ['rota' => 'receita.pesquisar', 'data' => $data ]) @endcomponent
+    @component('components.navegacao', ['rota' => 'receita.pesquisar', 'data' => $data]) @endcomponent
 @endsection
 
 @section('acoes')
@@ -16,7 +16,6 @@
 @section('cabecalho') 
     <th scope="col">Descrição </th>
     <th scope="col">Data</th>
-    <th scope="col">Tipo</th>
     <th scope="col">Valor</th>
 @endsection
 
@@ -26,8 +25,7 @@
         <tr id="{{ $receita->id }}">
             <td data-label="Descrição">{{ $receita->descricao }}</td>
             <td data-label="Data">{{ $receita->data }} </td>
-            <td data-label="Tipo">{{ $receita->tipo }} </td>
-            <td data-label="Valor" class="money">{{ $receita->valor }} </td>
+            <td data-label="Valor">{{ $receita->valor }} </td>
         </tr>
     @endforeach        
 @else

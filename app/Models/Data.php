@@ -29,5 +29,43 @@ class Data extends Model {
         }
 
         return $dia;
-    } 
+    }
+
+    public static function extractDay($data) {
+        return intval(substr($data, 8, 2));
+    }
+
+    public static function extractMonth($data) {
+        return intval(substr($data, 5, 2));
+    }
+
+    public static function extractYear($data) {
+        return intval(substr($data, 1, 4));
+    }
+
+    public static  function addMes($data, $iMes) {
+        $dia = self::extractDay($data);
+        $mes = self::extractMonth($data);
+        $ano = self::extractYear($data);
+ 
+        for ($indice = 1; $indice <= $iMes; $indice++) {
+            if ($mes < 12) {
+                $mes = $mes + 1;
+            }
+            else {
+                $mes = 1;
+                $ano = $ano + 1;
+            }
+        }
+
+        return '20'.$ano.'-'.self::trataDigito($mes).'-'.self::trataDigito($dia);
+    }
+
+    private static function trataDigito($digito) {
+        if($digito < 10){
+            return '0'.$digito;
+        }
+
+        return $digito;
+    }
 }

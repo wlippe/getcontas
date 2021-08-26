@@ -22,6 +22,8 @@ class ContatoController extends Controller {
         Mail::to($contato->email)->send(new ContatoRespostaMail($contato));
         Mail::to('contato@getcontas.com')->send(new ContatoMail($contato));
 
-        return redirect('/contato')->with('sucess', 'Mensagem enviada com sucesso!');
+        toastr()->success('Mensagem enviada com sucesso!');
+
+        return redirect('/contato');
     }
 }

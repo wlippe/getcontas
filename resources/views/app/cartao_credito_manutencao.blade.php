@@ -20,7 +20,7 @@
                    name="titular" value="{{ $registro->titular }}" required autocomplete="titular" autofocus {{$show ? 'disabled':''}} >
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <label for="bandeira" class="form-label"> Bandeira </label>
             <select id="bandeira" name="bandeira" class="form-control" required {{$show ? 'disabled':''}} >
                 <option value="" selected disabled >Selecione </option>
@@ -42,12 +42,6 @@
             <label for="digitos" class="form-label"> Dígitos</label>
             <input id="digitos" type="text" min="4" maxlength="4" size="4" class="form-control" name="digitos" required autocomplete="digitos"
              value="{{ $registro->digitos?? ''}}" {{$show ? 'disabled':''}} >
-        </div>
-
-        <div class="col-md-2">
-            <label for="limite" class="form-label"> Limite </label>
-            <input id="limite" type="text" class="form-control money @error('limite') is-invalid @enderror" 
-            name="limite" value="{{ $registro->limite?? ''}}" required autocomplete="limite" {{$show ? 'disabled':''}} placeholder="0,00">
         </div>
 
     </div>

@@ -6,6 +6,7 @@ use App\Models\Data;
 use App\Models\Conta;
 use App\Models\Despesa;
 use App\Models\CartaoCredito;
+use App\Models\Pagamento;
 use Illuminate\Http\Request;
 
 class ContasPagarController extends PadraoController {
@@ -19,6 +20,8 @@ class ContasPagarController extends PadraoController {
     }
 
     protected function index($data = null) {
+        $this->processaReceitas();
+
         if(!$data) {
             $data = new \stdClass();
             $data->mes = intval(date('m'));
@@ -35,6 +38,10 @@ class ContasPagarController extends PadraoController {
             $registro->valor = $this->formataValor($registro->valor);
             $registro->datavencimento = $this->formataData($registro->datavencimento);
             $registro->situacao = $this->formataSituacaoDespesa($registro->situacao);
+            
+            if ($registro->tipo == 2 ) {
+                $registro->parcelas = $registro->parcela.'/'.$registro->parcelastotal;
+            }
         }
 
         return view('app.contas_pagar', [  
@@ -76,26 +83,55 @@ class ContasPagarController extends PadraoController {
 
     protected function pagamento(Request $request) {
         $despesa = new Despesa();
-        $despesa = $despesa->where('id', $request->id_despesa);
+        $despesa = $despesa->where('id', $request->despesa_id);
         $despesa = $despesa->where(self::ID_USUARIO, $this->getUserId());
-        $despesa = $despesa->get()->first();
+        
+        if($despesa = $despesa->get()->first()) {
 
-        $dados['situacao'] = 1;
+            $pagamento = $request->all();
+            $pagamento['user_id'] = $this->getUserId();
+            $pagamento['valor']   = $despesa->valor;
 
-        $despesa->update($dados);
+            Pagamento::create($pagamento);
+
+            $dados['situacao'] = 1;
+
+            $despesa->update($dados);
+
+            toastr()->success('Pagamento realizado!');
+
+            return $this->index();
+        }
+
+        toastr()->error('Ocorreu um erro ao realizar o pagamento!');
 
         return $this->index();
     }
 
     protected function cancelar(Request $request) {
-        $despesa = new Despesa();
-        $despesa = $despesa->where('id', $request->id_despesa);
-        $despesa = $despesa->where(self::ID_USUARIO, $this->getUserId());
-        $despesa = $despesa->get()->first();
+        $pagamento = new Pagamento();
+        $pagamento = $pagamento->where('despesa_id', $request->id_despesa_cancelar);
+        $pagamento = $pagamento->where(self::ID_USUARIO, $this->getUserId());
+        $pagamento = $pagamento->get();       
 
-        $dados['situacao'] = 0;
+        if ($pagamento = $pagamento->first()) {
+            $pagamento->delete();
 
-        $despesa->update($dados);
+            $despesa = new Despesa();
+            $despesa = $despesa->where('id', $request->id_despesa_cancelar);
+            $despesa = $despesa->where(self::ID_USUARIO, $this->getUserId());
+            $despesa = $despesa->get()->first();
+    
+            $dados['situacao'] = 0;
+    
+            $despesa->update($dados);
+    
+            toastr()->warning('Pagamento Cancelado!');
+    
+            return $this->index();
+        }
+
+        toastr()->error('Ocorreu um erro ao cancelar o pagamento!');
 
         return $this->index();
     }

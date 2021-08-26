@@ -20,7 +20,6 @@ class CreateCartaoCreditoTable extends Migration {
             $table->smallInteger('bandeira');
             $table->smallInteger('digitos')->nullable();
             $table->float('limite')->nullable();
-
             $table->timestamps();
         });
     }

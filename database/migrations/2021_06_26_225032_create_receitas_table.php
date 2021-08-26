@@ -14,9 +14,10 @@ class CreateReceitasTable extends Migration {
         Schema::create('receitas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('descricao', 50);
+            $table->bigInteger('conta_id');
+            $table->string('descricao', 50)->nullable();
             $table->float('valor');
-            $table->smallInteger('tipo');
+            $table->smallInteger('tipo')->nullable();
             $table->date('data');
             $table->timestamps();
         });

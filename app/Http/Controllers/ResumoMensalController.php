@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class ResumoMensalController extends PadraoController {
 
-
     protected function pesquisar(Request $request){
         $data = new \stdClass();
         $data->mes = $request->mes;
@@ -19,6 +18,8 @@ class ResumoMensalController extends PadraoController {
     }
 
     protected function index($data = null) {
+        $this->processaReceitas();
+
         if(!$data) {
             $data = new \stdClass();
             $data->mes = intval(date('m'));
@@ -31,6 +32,11 @@ class ResumoMensalController extends PadraoController {
             $registro->valor = $this->formataValor($registro->valor);
             $registro->datavencimento = $this->formataData($registro->datavencimento);
             $registro->situacao = $this->formataSituacaoDespesa($registro->situacao);
+
+            if ($registro->tipo == 2 ) {
+                $registro->parcelas = $registro->parcela.'/'.$registro->parcelastotal;
+            }
+            
         }
 
         $receita = $this->getReceita($data);

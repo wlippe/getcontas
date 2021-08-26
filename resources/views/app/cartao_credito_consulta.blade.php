@@ -15,7 +15,6 @@
     <th scope="col" > Data Vencimento </th>
     <th scope="col" > Bandeira </th>
     <th scope="col" > Dígitos </th>
-    <th scope="col" > Limite </th>
 @endsection
 
 @section('consulta')
@@ -28,7 +27,6 @@
             <td data-label="Data Vencimento" > {{ $registro->datavencimento }} </td>
             <td data-label="Bandeira" > {{ $registro->bandeira }} </td>
             <td data-label="Dígitos" > {{ $registro->digitos }} </td>
-            <td data-label="Limite" class="money" > {{ $registro->limite }} </td>
         </tr>
     @endforeach
 @else

@@ -17,7 +17,7 @@
         </div>
         <div class="modal-body">
             Deseja realmente cancelar este Pagamento?
-            <input id="id_despesa"  name="id_despesa" type="hidden" value="">
+            <input id="id_despesa_cancelar" name="id_despesa_cancelar" type="hidden" value="">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm " data-bs-dismiss="modal"> Fechar </button>
@@ -34,7 +34,7 @@
         $('button').click( function() {
 
             if( $(this).attr('id')) {
-                $(document).find('#id_despesa').attr('value', $(this).attr('id'));
+                $(document).find('#id_despesa_cancelar').attr('value', $(this).attr('id'));
             }
         });
     });

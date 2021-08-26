@@ -59,4 +59,13 @@ class CartaoCreditoController extends PadraoController {
 
         return $aBandeiras[$iBandeira];
     }
+
+    protected function validaRequest($request){
+        return $this->validate($request, [
+            'descricao' => ['required', 'string', 'max:100'],
+            'titular' => ['required', 'string', 'max:100'],
+            'datavencimento' => ['required'],
+            'bandeira' => ['required']
+        ]);
+    }
 }

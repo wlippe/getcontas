@@ -19,7 +19,7 @@
     <th scope="col" > Parcelas </th>
     <th scope="col" > Tipo </th>
     <th scope="col" > Situação </th>
-    <th scope="col" > valor </th>
+    <th scope="col" > Valor </th>
 @endsection
 
 @section('consulta')
@@ -30,8 +30,8 @@
             <td data-label="Data Vencimento"> {{ $registro->datavencimento }} </td>
             <td data-label="Parcelas"> {{ $registro->parcelas }} </td>
             <td data-label="Tipo"> {{ $registro->tipo }} </td>
-            <td data-label="Situação"> {{ $registro->siuacao }} </td>
-            <td data-label="valor" class="money"> {{ $registro->valor }} </td>
+            <td data-label="Situação"> {{ $registro->situacao }} </td>
+            <td data-label="valor"> {{ $registro->valor }} </td>
         </tr>
     @endforeach
 @else

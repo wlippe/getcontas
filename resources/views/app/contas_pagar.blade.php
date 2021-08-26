@@ -15,6 +15,7 @@
                                     <tr>
                                         <th scope="col" > Descrição  </th>
                                         <th scope="col" > Data       </th>
+                                        <th scope="col" > Parcelas   </th>
                                         <th scope="col" > Valor      </th>
                                         <th scope="col" > Situação   </th>
                                         <th scope="col" style="width:9%; text-align:center"> Ações  </th>
@@ -27,6 +28,7 @@
                                             <tr id="{{ $registro->id }}">
                                                 <td data-label="Descrição"> {{ $registro->descricao }} </td>
                                                 <td data-label="Data"> {{ $registro->datavencimento }} </td>
+                                                <td data-label="Parcelas"> {{ $registro->parcelas }} </td>
                                                 <td data-label="valor" > {{ $registro->valor }} </td>
                                                 <td data-label="Situação"> {{ $registro->situacao }} </td>
                                                 <td data-label="Ações">

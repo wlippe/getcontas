@@ -25,7 +25,7 @@
 
                 <div class="col-md-12"> 
                     <label for="nome" class="form-label"> Pagar com </label>
-                    <select id="tipo" name="tipo" class="form-control" >
+                    <select id="conta_id" name="conta_id" class="form-control" >
                         @foreach($conta as $registro)
                             <option value="{{ $registro->id }}"> {{ $registro->tipo .' - '. $registro->nome }} </option>
                         @endforeach
@@ -34,7 +34,7 @@
 
             </div>
 
-            <input id="id_despesa" name="id_despesa" type="hidden" value="">
+            <input id="despesa_id" name="despesa_id" type="hidden" value="">
 
         </div>
         <div class="modal-footer">
@@ -52,7 +52,7 @@
         $('button').click( function() {
 
             if( $(this).attr('id')) {
-                $(document).find('#id_despesa').attr('value', $(this).attr('id'));
+                $(document).find('#despesa_id').attr('value', $(this).attr('id'));
             }
         });
     });

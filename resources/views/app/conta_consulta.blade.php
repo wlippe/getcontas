@@ -23,7 +23,7 @@
             <td data-label="Nome"> {{ $conta->nome }}      </td>
             <td data-label="Descrição"> {{ $conta->descricao }} </td>
             <td data-label="Tipo"> {{ $conta->tipo }}      </td>
-            <td data-label="Saldo" class="money" > {{ $conta->saldo }} </td>
+            <td data-label="Saldo"> {{ $conta->saldo }} </td>
         </tr>
     @endforeach
 @else

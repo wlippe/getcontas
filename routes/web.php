@@ -25,7 +25,7 @@ Route::get('/home', function () {
 
 // Rota de contingência, desenvolver pagina custumizada!
 Route::fallback(function() {
-    return view('welcome');
+    return view('fallback');
 });
 
 Route::get('/contato',  [ContatoController::class, 'index'])->name('contato');
@@ -68,6 +68,7 @@ Route::post('/aplicacoes/editar',     [AplicacaoController::class, 'edit'])->nam
 Route::post('/aplicacoes/visualizar', [AplicacaoController::class, 'show'])->name('aplicacao.show');
 Route::post('/aplicacoes/atualizar',  [AplicacaoController::class, 'update'])->name('aplicacao.update');
 Route::delete('/aplicacoes/excluir',  [AplicacaoController::class, 'destroy'])->name('aplicacao.destroy');
+Route::post('/aplicacoes/movimentar', [AplicacaoController::class, 'movimentar'])->name('aplicacao.movimentar');
 
 Route::get('/contas',             [ContaController::class, 'index'])->name('conta');
 Route::get('/contas/cadastrar',   [ContaController::class, 'create'])->name('conta.create');
@@ -77,6 +78,7 @@ Route::post('/contas/visualizar', [ContaController::class, 'show'])->name('conta
 Route::post('/contas/atualizar',  [ContaController::class, 'update'])->name('conta.update');
 Route::delete('/contas/excluir',  [ContaController::class, 'destroy'])->name('conta.destroy');
 
+/* Funcionalidade desativada
 Route::get('/cartao-de-credito',             [CartaoCreditoController::class, 'index'])->name('cartaocredito');
 Route::get('/cartao-de-credito/cadastrar',   [CartaoCreditoController::class, 'create'])->name('cartaocredito.create');
 Route::post('/cartao-de-credito/salvar',     [CartaoCreditoController::class, 'store'])->name('cartaocredito.store');
@@ -84,6 +86,7 @@ Route::post('/cartao-de-credito/editar',     [CartaoCreditoController::class, 'e
 Route::post('/cartao-de-credito/visualizar', [CartaoCreditoController::class, 'show'])->name('cartaocredito.show');
 Route::post('/cartao-de-credito/atualizar',  [CartaoCreditoController::class, 'update'])->name('cartaocredito.update');
 Route::delete('/cartao-de-credito/excluir',  [CartaoCreditoController::class, 'destroy'])->name('cartaocredito.destroy');
+*/
 
 Route::get('/contas-a-pagar',            [ContasPagarController::class, 'index'])->name('contas.pagar');
 Route::post('/contas-a-pagar',           [ContasPagarController::class, 'pesquisar'])->name('contas.pagar.pesquisar');

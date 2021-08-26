@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Despesa extends Model {
+class Extrato extends Model {
+
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'cartaocredito_id',
-        'descricao',
-        'datavencimento',
+        'receita_id',
+        'aplicacao_id',
+        'conta_id',
         'valor',
         'tipo',
-        'situacao',
-        'parcela',
-        'parcelastotal'
+        'lancamento',
+        'data'
     ];
 
     public function user() {

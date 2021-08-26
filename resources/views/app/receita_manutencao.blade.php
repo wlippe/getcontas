@@ -18,26 +18,25 @@
                                 <input id="descricao" type="text" class="form-control @error('descricao') is-invalid @enderror" name="descricao" value="{{ $registro->descricao?? ''}} {{ old('descricao') }}" autocomplete="descricao" autofocus {{$show ? 'disabled':''}} >
                             </div>
 
-                            <div class="col-md-4">
-                                <label for="tipo" class="form-label"> Tipo </label>
-                                <select id="tipo" name="tipo" class="form-control @error('tipo') is-invalid @enderror" {{$show ? 'disabled':''}} >
-                                    <option value="" selected disabled>Selecione</option>
-                                    <option value="1" {{$registro->tipo ?? '' == 1 ? "selected='selected'" : ""}} {{old('tipo') == 1 ? "selected='selected'" : ""}} > Pontual </option>
-                                    <option value="2" {{$registro->tipo ?? '' == 2 ? "selected='selected'" : ""}} {{old('tipo') == 2 ? "selected='selected'" : ""}} > Semanal </option>
-                                    <option value="3" {{$registro->tipo ?? '' == 3 ? "selected='selected'" : ""}} {{old('tipo') == 3 ? "selected='selected'" : ""}} > Mensal  </option>
-                                    <option value="4" {{$registro->tipo ?? '' == 4 ? "selected='selected'" : ""}} {{old('tipo') == 4 ? "selected='selected'" : ""}} > Anual   </option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="data" class="form-label"> Data </label>
                                 <input id="data" type="date" class="form-control @error('data') is-invalid @enderror" name="data" autocomplete="data" value="{{ $registro->data?? ''}}{{ old('data') ?? "" }}" {{$show ? 'disabled':''}} >
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="valor" class="form-label"> Valor </label>
                                 <input id="valor" type="number" class="form-control money @error('valor') is-invalid @enderror" 
-                                name="valor" value="{{ $registro->valor?? ''}}{{ old('valor') ?? ""}}"  autocomplete="valor" {{$show ? 'disabled':''}} placeholder="0,00">
+                                name="valor" value="{{ $registro->valor?? ''}}{{ old('valor') ?? ""}}"  autocomplete="valor" 
+                                onchange="this.value = parseFloat(this.value).toFixed(2)" {{$show ? 'disabled':''}} placeholder="0,00">
+                            </div>
+
+                            <div class="col-md-12"> 
+                                <label for="conta_id" class="form-label"> Conta </label>
+                                <select id="conta_id" name="conta_id" class="form-control @error('conta_id') is-invalid @enderror" {{$show ? 'disabled':''}} >
+                                    @foreach($contas as $conta)
+                                        <option value="{{ $conta->id }}" {{ $registro->conta_id == $conta->id ? "selected='selected'" : "" }} {{old('conta') == $conta->id ? "selected='selected'" : ""}} > {{ $conta->tipo .' - '. $conta->nome }} </option>
+                                    @endforeach
+                                </select>
                             </div>
 
                         </div>

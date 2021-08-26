@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 abstract class PadraoController extends Controller {
 
     const ID_USUARIO = 'user_id';
+    const CREDITO    = 1;
+    const DEBITO     = 2;
 
     protected $Model;
     protected $nome;
@@ -19,6 +21,8 @@ abstract class PadraoController extends Controller {
      * Renderiza a view de consulta.
      */
     protected function index() {
+        $this->processaReceitas();
+
         $consulta = $this->getModel()->where(self::ID_USUARIO, $this->getUserId());
         $consulta = $consulta->paginate(10);
         $consulta = $this->trataConsulta($consulta);
@@ -41,7 +45,7 @@ abstract class PadraoController extends Controller {
     }
 
     /**
-     * Salva a nova receita no banco de dados.
+     * Salva o registro no banco de dados.
      */
     protected function store(Request $request) {
         $this->validaRequest($request);
@@ -55,11 +59,14 @@ abstract class PadraoController extends Controller {
         if($this->validaInclusao($dados)) {
             $this->getModel()->create($dados);
 
-            return redirect(route($this->getRota()))->with('sucess', 'Registro incluído com sucesso!');
-        }
-        
+            toastr()->success('Registro cadastrado com sucesso!');
 
-        return redirect(route($this->getRota()))->with('error', 'Não foi possível incluir o registro!');
+            return redirect(route($this->getRota()));
+        }
+
+        toastr()->error('Não foi possível cadastrar o registro!');
+
+        return redirect(route($this->getRota()));
     }
 
     /**
@@ -128,12 +135,16 @@ abstract class PadraoController extends Controller {
             if ($this->validaAlteracao($request)) {
                 $registro->update($dados);
 
-                return redirect(route($this->getRota()))->with('sucess', 'Registro alterado com sucesso!');
+                toastr()->success('Registro alterado com sucesso!');
+
+                return redirect(route($this->getRota()));
             }
 
         }
 
-        return redirect(route($this->getRota()))->with('danger', 'Não foi possível alterar o registro!');
+        toastr()->error('Não foi possível alterar o registro!');
+
+        return redirect(route($this->getRota()));
     }
 
     /**
@@ -151,12 +162,16 @@ abstract class PadraoController extends Controller {
 
                 $dados->delete();
 
-                return redirect(route($this->getRota()))->with('msg_exclusao', 'Registro excluído com sucesso!');
+                toastr()->success('Registro excluído com sucesso!');
+
+                return redirect(route($this->getRota()));
             }
 
         }
 
-        return redirect(route($this->getRota()))->with('msg_exclusao_erro', 'Não foi possível excluir o registro!');
+        toastr()->error('Não foi possível excluir o registro!');
+
+        return redirect(route($this->getRota()));
     }
 
     /**
@@ -179,7 +194,7 @@ abstract class PadraoController extends Controller {
      * $dec_point = Separador da casa decimal
      * $mil_point = Separador da casa de milhar
      */
-    protected function formataValor($valor, $decimais = 2, $dec_point = ",", $mil_point = ".") {
+    protected function formataValor($valor, $decimais = 2, $dec_point = ",", $mil_point = false) {
         return number_format($valor, $decimais, $dec_point, $mil_point);
     }
 
@@ -326,6 +341,99 @@ abstract class PadraoController extends Controller {
     }
 
     protected function getDataAtual() {
-        return  date('Y/m/d');
+        return date('Y/m/d');
+    }
+
+    protected function trataDigito($digito) {
+        if($digito < 10){
+            return '0'.$digito;
+        }
+
+        return $digito;
+    }
+
+    protected function processaReceitas() {
+        $receita = new \App\Models\Receita();
+        $receita = $receita->where(self::ID_USUARIO, $this->getUserId());
+
+        $receitas = $receita->get();
+
+        foreach($receitas as $receita) {
+            $this->verificaReceitaAlterada($receita);
+    
+            if ($this->comparaDatas($receita->data, false, true)) {
+                $extrato = new \App\Models\Extrato();
+                $extrato = $extrato->where(self::ID_USUARIO, $this->getUserId());
+                $extrato = $extrato->where('receita_id', $receita->id);
+
+                if (!$extrato->get()->first()) {
+                    $dados['receita_id'] = $receita->id ;
+                    $dados['conta_id']   = $receita->conta_id ;
+                    $dados['user_id']    = $receita->user_id;
+                    $dados['valor']      = $receita->valor;
+                    $dados['lancamento'] = self::CREDITO;
+                    $dados['data']       = $receita->data ;
+
+                    $newExtrato = new \App\Models\Extrato();
+                    $newExtrato->create($dados);
+                }
+            }
+        }
+    }
+
+    protected function verificaReceitaAlterada($receita) {
+        $extrato = new \App\Models\Extrato();
+        $extrato = $extrato->where(self::ID_USUARIO, $this->getUserId());
+        $extrato = $extrato->where('receita_id', $receita->id);
+        
+        if($extrato = $extrato->get()->first() ) {
+            if ($extrato->conta_id != $receita->conta_id) {
+                $extrato->update(['conta_id' => $receita->conta_id]);
+            }
+
+            if ($extrato->valor != $receita->valor) {
+                $extrato->update(['valor' => $receita->valor]);
+            }
+
+            if ($extrato->data != $receita->data) {
+                if (!$this->comparaDatas($receita->data, false, true)) {
+                    $extrato->delete();
+                }
+                else {
+                    $extrato->update(['data' => $receita->data]);
+                }
+            }
+        }
+    }
+
+    /*
+     * Retorna se a primeira Data é menor que a segunda.
+     */
+    private function comparaDatas($data1, $data2 = false, $consideraIgual = false) {
+        $ano = substr($data1, 0, 4);
+        $mes = substr($data1, 5, 2);
+        $dia = substr($data1, 8, 2);
+
+        $data1 = $ano.$mes.$dia;
+        $data1 = intval($data1);
+
+        if($data2) {
+            $ano = substr($data2, 0, 4);
+            $mes = substr($data2, 5, 2);
+            $dia = substr($data2, 8, 2);
+    
+            $data2 = $ano.$mes.$dia;
+            $data2 = intval($data2);
+        }
+        else {
+            $dataAtual = intval(date("Ymd"));
+            $data2     = $dataAtual;
+        }
+
+        if ($consideraIgual) {
+            return $data1 <= $data2;
+        }
+
+        return $data1 < $data2;
     }
 }

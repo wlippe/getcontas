@@ -41,6 +41,7 @@
                                     <tr>
                                         <th scope="col" > Descrição  </th>
                                         <th scope="col" > Data       </th>
+                                        <th scope="col" > Parcelas   </th>
                                         <th scope="col" > Valor      </th>
                                         <th scope="col" > Situação   </th>
                                     </tr>
@@ -50,6 +51,7 @@
                                         <tr id="{{ $registro->id }}" style="color:green">
                                             <td data-label="Descrição"> {{ $registro->descricao }} </td>
                                             <td data-label="Data"> {{ $registro->data }} </td>
+                                            <td data-label="Parcelas"> </td>
                                             <td data-label="valor"> {{ $registro->valor }} </td>
                                             <td data-label="Situação"> {{ $registro->situacao }} </td>
                                             
@@ -61,8 +63,9 @@
                                             <tr id="{{ $registro->id }}" style="color:red">
                                                 <td data-label="Descrição"> {{ $registro->descricao }} </td>
                                                 <td data-label="Data"> {{ $registro->datavencimento }} </td>
-                                                <td data-label="valor" > {{ $registro->valor }} </td>
-                                                <td data-label="Situação"> {{ $registro->situacao }} </td>
+                                                <td data-label="Parcelas"> {{ $registro->parcelas }}   </td>
+                                                <td data-label="valor" > {{ $registro->valor }}        </td>
+                                                <td data-label="Situação"> {{ $registro->situacao }}   </td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -73,7 +76,7 @@
                             <div style="padding-top:2rem">
                                 <div class="card" style="padding:1rem;">
 
-                                    <table id="tabela_consulta">
+                                    <table id="tabela_consulta" style="font-weight: 500;">
                                         <tr>
                                             <td data-label="Total Receita:"> Total Receita: </td>
                                             <td style="float:right;" > {{ $resumomensal->totalreceita }}  </td>
