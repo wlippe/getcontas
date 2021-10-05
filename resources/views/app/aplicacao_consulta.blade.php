@@ -40,7 +40,3 @@
     </tr>
 @endif
 @endsection
-
-@section('paginacao')
-    @component('components.paginacao', ['consulta' => $consulta]) @endcomponent
-@endsection

@@ -28,7 +28,7 @@ class ReceitaController extends PadraoController {
         $consulta = $this->getModel()->where(self::ID_USUARIO, $this->getUserId());
         $consulta = $consulta->whereDate('data', '>=', Data::getFirstDay($data));
         $consulta = $consulta->whereDate('data', '<=', Data::getLastDay($data));
-        $consulta = $consulta->paginate(10);
+        $consulta = $consulta->get();
         $consulta = $this->trataConsulta($consulta);
 
         return view($this->getViewConsulta(), [

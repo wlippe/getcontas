@@ -19,7 +19,7 @@ class AplicacaoController extends PadraoController {
         $this->processaReceitas();
 
         $consulta = $this->getModel()->where(self::ID_USUARIO, $this->getUserId());
-        $consulta = $consulta->paginate(10);
+        $consulta = $consulta->get();
         $consulta = $this->trataConsulta($consulta);
 
         return view($this->getViewConsulta(), [

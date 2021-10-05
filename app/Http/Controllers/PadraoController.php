@@ -24,7 +24,7 @@ abstract class PadraoController extends Controller {
         $this->processaReceitas();
 
         $consulta = $this->getModel()->where(self::ID_USUARIO, $this->getUserId());
-        $consulta = $consulta->paginate(10);
+        $consulta = $consulta->get();
         $consulta = $this->trataConsulta($consulta);
 
         return view($this->getViewConsulta(), ['consulta' => $consulta]);

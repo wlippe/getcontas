@@ -60,7 +60,7 @@
 
                                     @if($despesa)
                                         @foreach($despesa as $registro)
-                                            <tr id="{{ $registro->id }}" style="color:red">
+                                            <tr id="{{ $registro->id }}" style="color:{{ $registro->situacao_codigo == 1? blue:red }}">
                                                 <td data-label="Descrição"> {{ $registro->descricao }} </td>
                                                 <td data-label="Data"> {{ $registro->datavencimento }} </td>
                                                 <td data-label="Parcelas"> {{ $registro->parcelas }}   </td>

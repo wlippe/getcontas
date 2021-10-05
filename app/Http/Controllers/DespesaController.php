@@ -27,7 +27,7 @@ class DespesaController extends PadraoController {
         $consulta = $this->getModel()->where(self::ID_USUARIO, $this->getUserId());
         $consulta = $consulta->whereDate('datavencimento', '>=', Data::getFirstDay($data));
         $consulta = $consulta->whereDate('datavencimento', '<=', Data::getLastDay($data));
-        $consulta = $consulta->paginate(10);
+        $consulta = $consulta->get();
         $consulta = $this->trataConsulta($consulta);
 
         return view($this->getViewConsulta(), [

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'GetContas') }}</title>
+    <title>GetContas</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -46,7 +46,7 @@
 
     <script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}"></script>
 
-     @toastr_css
+     <!--@toastr_css -->
 
 </head>
 <body style="background-color:rgb(246,246,246)">
@@ -163,11 +163,11 @@
         </div>
 
         <main class="py-4">
-
+<!--
             @jquery
             @toastr_js
             @toastr_render
-            
+-->
 
             @yield('content')
         </main>

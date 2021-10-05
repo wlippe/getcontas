@@ -31,6 +31,7 @@ class ResumoMensalController extends PadraoController {
         foreach ($despesa as $registro) {
             $registro->valor = $this->formataValor($registro->valor);
             $registro->datavencimento = $this->formataData($registro->datavencimento);
+            $registro->situacao_codigo = $registro->situacao;
             $registro->situacao = $this->formataSituacaoDespesa($registro->situacao);
 
             if ($registro->tipo == 2 ) {
