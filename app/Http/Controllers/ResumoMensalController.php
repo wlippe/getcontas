@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class ResumoMensalController extends PadraoController {
 
+    public function __construct() {
+        $this->middleware('auth'); 
+    }
+
     protected function pesquisar(Request $request){
         $data = new \stdClass();
         $data->mes = $request->mes;

@@ -178,7 +178,7 @@ abstract class PadraoController extends Controller {
      * Retorna o Id do Usuário logado
      */
     protected function getUserId() {
-        return Auth()->user()->id;
+            return Auth()->user()->id;
     }
 
     /**
