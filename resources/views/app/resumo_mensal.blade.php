@@ -48,7 +48,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($receita as $registro)
-                                        <tr id="{{ $registro->id }}" style="color:green">
+                                        <tr id="{{ $registro->id }}" style="color: green">
                                             <td data-label="Descrição"> {{ $registro->descricao }} </td>
                                             <td data-label="Data"> {{ $registro->data }} </td>
                                             <td data-label="Parcelas"> </td>
@@ -60,7 +60,7 @@
 
                                     @if($despesa)
                                         @foreach($despesa as $registro)
-                                            <tr id="{{ $registro->id }}" style="color:{{ $registro->situacao_codigo == 1? blue:red }}">
+                                            <tr id="{{ $registro->id }}" style="color:{{ $registro->situacao_codigo == 1? 'rgb(66, 117, 245)' : 'rgb(235, 20, 20)' }}">
                                                 <td data-label="Descrição"> {{ $registro->descricao }} </td>
                                                 <td data-label="Data"> {{ $registro->datavencimento }} </td>
                                                 <td data-label="Parcelas"> {{ $registro->parcelas }}   </td>
@@ -78,18 +78,18 @@
 
                                     <table id="tabela_consulta" style="font-weight: 500;">
                                         <tr>
-                                            <td data-label="Total Receita:"> Total Receita: </td>
-                                            <td style="float:right;" > {{ $resumomensal->totalreceita }}  </td>
-                                            <td style="width:30%;"> </td>
                                             <td data-label="Saldo A Pagar:"> Saldo A Pagar: </td>
                                             <td style="float:right;"> {{ $resumomensal->saldoapagar }} </td>
+                                            <td style="width:30%;"> </td>
+                                            <td data-label="Total Receita:"> Total Receita: </td>
+                                            <td style="float:right;" > {{ $resumomensal->totalreceita }}  </td>
                                         </tr>
                                     <tr>
-                                        <td data-label="Total Despesa:"> Total Despesa: </td>
-                                        <td style="float:right;"> {{ $resumomensal->totaldespesa }} </td>
-                                        <td style="width:30%;"> </td>
                                         <td data-label="Saldo Pago:"> Saldo Pago: </td>
                                         <td style="float:right;"> {{ $resumomensal->saldopago }} </td>
+                                        <td style="width:30%;"> </td>
+                                        <td data-label="Total Despesa:"> Total Despesa: </td>
+                                        <td style="float:right;"> {{ $resumomensal->totaldespesa }} </td>
                                     </tr>
 
                                     <tr>
