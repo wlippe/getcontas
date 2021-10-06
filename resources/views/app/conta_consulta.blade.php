@@ -17,7 +17,7 @@
 @endsection
 
 @section('consulta')
-@if($consulta->total() > 0)
+@if(count($consulta) > 0)
     @foreach($consulta as $conta)
         <tr id="{{ $conta->id }}" name="consulta">
             <td data-label="Nome"> {{ $conta->nome }}      </td>

@@ -23,7 +23,7 @@
 @endsection
 
 @section('consulta')
-@if($consulta->total() > 0)
+@if(count($consulta) > 0)
     @foreach($consulta as $registro)
         <tr id="{{ $registro->id }}">
             <td data-label="Descrição"> {{ $registro->descricao }} </td>
